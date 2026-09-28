@@ -23,7 +23,7 @@ export default function Shape({ name, tone, className = "", parallax, intro = fa
           width={640}
           height={640}
           sizes="320px"
-          data-intro={intro ? 7 : undefined}
+          data-intro={intro ? 4 : undefined}
           data-intro-kind={intro ? "scale" : undefined}
           className="size-full object-contain"
         />

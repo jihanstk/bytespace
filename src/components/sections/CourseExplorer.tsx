@@ -57,7 +57,7 @@ export default function CourseExplorer() {
         {visible.length > 0 ? (
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {visible.map((course) => (
-              <li key={course.title}>
+              <li key={course.title} className="min-w-0">
                 <CourseCard course={course} />
               </li>
             ))}

@@ -26,9 +26,9 @@ export default function Hero() {
           className="font-heading text-[clamp(2.5rem,4.2vw+0.75rem,4.5rem)] leading-[1.2] font-semibold"
         >
           {headingLines.map((line) => (
-            <span key={line} className="block overflow-hidden pb-1">
-              <span data-intro="1" className="block">
-                {line}
+            <span key={line} className="md:block md:overflow-hidden md:pb-1">
+              <span data-intro="1" className="inline md:block">
+                {line}{" "}
               </span>
             </span>
           ))}

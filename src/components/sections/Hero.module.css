@@ -81,12 +81,13 @@
   }
 
   .progress {
-    left: calc(900 * var(--u));
+    left: calc(770 * var(--u));
+    top: calc(30 * var(--u));
   }
 
   .students {
-    left: calc(290 * var(--u));
-    top: calc(300 * var(--u));
+    left: calc(335 * var(--u));
+    top: calc(290 * var(--u));
   }
 }
 
@@ -138,8 +139,14 @@
   rotate: -10deg;
 }
 
-@media (max-width: 767px) {
-  .springSmall,
+/* Below the design width the ornaments shrink faster than the copy, so the inner ones would collide with it. */
+@media (max-width: 1279px) {
+  .springSmall {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
   .pyramid {
     display: none;
   }

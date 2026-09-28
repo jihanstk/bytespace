@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer id="footer" className="bg-white pt-14 pb-10 md:pt-17.5 md:pb-11">
       <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-[1fr_38.75rem] lg:gap-10">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[1fr_38.75rem]">
           <div data-reveal>
             <Link href="/" aria-label="ByteSpace home" className="inline-block">
               <Logo variant="dark" />

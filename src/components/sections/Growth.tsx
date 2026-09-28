@@ -11,14 +11,14 @@ export default function Growth() {
   return (
     <section aria-label="Grow with ByteSpace" className={`${styles.section} overflow-hidden py-20 md:py-30`}>
       <div className="container-page flex flex-col gap-20 md:gap-27.5">
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-10 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
               align="left"
               title={
                 <>
                   Your Path to Professional
-                  <br className="hidden lg:block" /> Growth Starts Here!
+                  <br className="hidden sm:block" /> Growth Starts Here!
                 </>
               }
             />
@@ -37,7 +37,7 @@ export default function Growth() {
             </dl>
           </div>
 
-          <div data-reveal className={`${styles.stage} mx-auto max-w-144 md:mr-0`}>
+          <div data-reveal className={`${styles.stage} mx-auto max-w-144 lg:mr-0`}>
             <div className={`${styles.canvas} ${styles.pathCanvas}`} aria-hidden>
               <CourseCard course={courses[0]} interactive={false} sizes="341px" className={`${styles.place} ${styles.pathCard}`} />
               <Image
@@ -56,8 +56,8 @@ export default function Growth() {
           </div>
         </div>
 
-        <div id="creators" className="grid scroll-mt-28 items-center gap-12 md:grid-cols-2 md:gap-10">
-          <div data-reveal className={`${styles.stage} order-last mx-auto max-w-145 md:order-first md:ml-0 xl:-ml-9.5`}>
+        <div id="creators" className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-10">
+          <div data-reveal className={`${styles.stage} order-last mx-auto max-w-145 lg:order-first lg:ml-0 xl:-ml-9.5`}>
             <div className={`${styles.canvas} ${styles.creatorCanvas}`} aria-hidden>
               <div className={`${styles.place} ${styles.metricCard} ${styles.revenue}`}>
                 <p className={styles.metricLabel}>Total Revenue</p>
@@ -94,7 +94,7 @@ export default function Growth() {
               title={
                 <>
                   Create &amp; Manage
-                  <br className="hidden lg:block" /> Courses Easily.
+                  <br className="hidden sm:block" /> Courses Easily.
                 </>
               }
             />
