@@ -2,7 +2,7 @@ export type NavLink = { label: string; href: string };
 
 export const mainNav: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Courses", href: "/#courses" },
+  { label: "Courses", href: "/search" },
   { label: "Creators", href: "/#creators" },
 ];
 
@@ -24,19 +24,22 @@ export const courseCategoryRows: string[][] = [
 ];
 
 export type Course = {
+  slug: string;
   title: string;
   image: string;
   categories: string[];
 };
 
 export const courses: Course[] = [
-  { title: "Learn Figma from Basic", image: "/images/course-figma.webp", categories: ["UI/UX Design", "Graphic Design"] },
-  { title: "Build Digital Asset", image: "/images/course-digital-asset.webp", categories: ["Digital Illustration", "Graphic Design", "Freelance & Entrepreneurship"] },
-  { title: "the Power of Big Data", image: "/images/course-big-data.webp", categories: ["Data Science", "Web Development"] },
-  { title: "Balancing Productivity and Wellbeing", image: "/images/course-productivity.webp", categories: ["Productivity"] },
-  { title: "Mastering Money Management", image: "/images/course-money.webp", categories: ["Freelance & Entrepreneurship", "Marketing"] },
-  { title: "From Idea to Startup Success", image: "/images/course-startup.webp", categories: ["Freelance & Entrepreneurship", "Marketing", "Social Media", "Creative Marketing"] },
+  { slug: "learn-figma-from-basic", title: "Learn Figma from Basic", image: "/images/course-figma.webp", categories: ["UI/UX Design", "Graphic Design"] },
+  { slug: "build-digital-asset", title: "Build Digital Asset", image: "/images/course-digital-asset.webp", categories: ["Digital Illustration", "Graphic Design", "Freelance & Entrepreneurship"] },
+  { slug: "the-power-of-big-data", title: "the Power of Big Data", image: "/images/course-big-data.webp", categories: ["Data Science", "Web Development"] },
+  { slug: "balancing-productivity-and-wellbeing", title: "Balancing Productivity and Wellbeing", image: "/images/course-productivity.webp", categories: ["Productivity"] },
+  { slug: "mastering-money-management", title: "Mastering Money Management", image: "/images/course-money.webp", categories: ["Freelance & Entrepreneurship", "Marketing"] },
+  { slug: "from-idea-to-startup-success", title: "From Idea to Startup Success", image: "/images/course-startup.webp", categories: ["Freelance & Entrepreneurship", "Marketing", "Social Media", "Creative Marketing"] },
 ];
+
+export const courseCategories = courseCategoryRows.flat();
 
 export const courseMeta = {
   lessons: "17 Lessons",

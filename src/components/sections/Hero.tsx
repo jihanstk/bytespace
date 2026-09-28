@@ -40,7 +40,7 @@ export default function Hero() {
 
         <form
           role="search"
-          action="/"
+          action="/search"
           data-intro="3"
           className="mt-10 flex w-full max-w-145 items-center gap-3 md:mt-15 md:gap-4"
         >

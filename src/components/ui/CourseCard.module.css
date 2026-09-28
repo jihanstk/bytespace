@@ -1,6 +1,7 @@
 /* `--cu` is one design pixel, so the card can also be used inside scaled illustrations. */
 .card {
   --unit: var(--cu, 1px);
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: calc(16 * var(--unit)) calc(16 * var(--unit)) calc(22 * var(--unit));
@@ -168,4 +169,21 @@
   color: var(--color-primary-800);
   font-size: calc(20 * var(--unit));
   font-weight: 700;
+}
+
+/* Stretches the title link over the whole card so the card is one click target. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--color-primary-800);
+  outline-offset: 3px;
 }

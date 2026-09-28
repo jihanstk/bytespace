@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Logo from "@/components/layout/Logo";
 import { BagIcon, CloseIcon, MenuIcon } from "@/components/ui/icons";
@@ -9,6 +10,7 @@ import { mainNav } from "@/lib/content";
 const SCROLLED_OFFSET = 24;
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -43,11 +45,11 @@ export default function Header() {
 
         <nav aria-label="Main" className="absolute left-1/2 hidden -translate-x-1/2 md:block">
           <ul className="flex items-center gap-6">
-            {mainNav.map((link, index) => (
+            {mainNav.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  aria-current={index === 0 ? "page" : undefined}
+                  aria-current={isCurrent(link.href, pathname) ? "page" : undefined}
                   className="group relative text-body-m text-white/90 transition-colors hover:text-white aria-[current=page]:font-medium aria-[current=page]:text-white"
                 >
                   {link.label}
@@ -107,4 +109,9 @@ export default function Header() {
       </nav>
     </header>
   );
+}
+
+function isCurrent(href: string, pathname: string) {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href) || (href === "/search" && pathname.startsWith("/courses"));
 }
