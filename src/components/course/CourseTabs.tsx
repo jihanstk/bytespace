@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useId, useState, type KeyboardEvent } from "react";
+import CourseReviews from "@/components/course/CourseReviews";
 import { CheckCircleIcon } from "@/components/ui/icons";
 import type { CourseDetail } from "@/lib/course-details";
-import { testimonials } from "@/lib/content";
 
-const tabs = ["About", "Lessons", "Reviews"] as const;
+const tabs = ["About", "Lesson", "Reviews"] as const;
 type Tab = (typeof tabs)[number];
 
 const heading = "font-heading text-heading-xs font-semibold text-neutral-950";
@@ -75,7 +75,7 @@ export default function CourseTabs({ detail }: { detail: CourseDetail }) {
           </>
         )}
 
-        {active === "Lessons" && (
+        {active === "Lesson" && (
           <>
             <h2 className={heading}>
               {detail.lessonCount} Lessons ({detail.hours} hours)
@@ -95,27 +95,7 @@ export default function CourseTabs({ detail }: { detail: CourseDetail }) {
           </>
         )}
 
-        {active === "Reviews" && (
-          <>
-            <h2 className={heading}>
-              {detail.rating} average from {detail.reviews} reviews
-            </h2>
-            <ul className="mt-5 flex flex-col gap-4">
-              {testimonials.map((review) => (
-                <li key={review.name} className="rounded-card border border-neutral-100 p-6">
-                  <div className="flex items-center gap-3">
-                    <Image src={review.avatar} alt="" width={48} height={48} className="size-12 rounded-full object-cover" />
-                    <div>
-                      <p className="text-label-l font-medium text-neutral-950">{review.name}</p>
-                      <p className="text-body-s text-primary-800">{review.role}</p>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-body-m text-neutral-600">&quot;{review.quote}&quot;</p>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+        {active === "Reviews" && <CourseReviews courseTitle={detail.heading} />}
       </div>
     </div>
   );

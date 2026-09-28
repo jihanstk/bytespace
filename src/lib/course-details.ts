@@ -237,3 +237,57 @@ export const creator = {
 };
 
 export const creatorHref = `/creators/${creator.slug}`;
+
+export type Review = {
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  postedAgo: string;
+  quote: string;
+};
+
+/** Star breakdown from the design, highest rating first. */
+export const ratingSummary = {
+  average: "4.7",
+  counts: [720, 120, 21, 12, 16],
+};
+
+export const courseReviews: Review[] = [
+  {
+    name: "PurePearl Studio",
+    role: "UI/UX Designer",
+    avatar: "/images/creator-purepearl.webp",
+    rating: 5,
+    postedAgo: "a year ago",
+    quote:
+      "The course provided me with a comprehensive understanding of digital asset creation. The lessons were in-depth, practical, and immediately applicable to my work. Highly recommended!",
+  },
+  {
+    name: "Albert Flores",
+    role: "UI/UX Designer",
+    avatar: "/images/avatar-8.webp",
+    rating: 5,
+    postedAgo: "a year ago",
+    quote:
+      "This course transformed my approach to digital design. The combination of theory, hands-on exercises, and real-world applications made it a truly enriching experience. Excited to implement what I've learned!",
+  },
+  {
+    name: "Cody Fisher",
+    role: "UI/UX Designer",
+    avatar: "/images/avatar-7.webp",
+    rating: 5,
+    postedAgo: "a year ago",
+    quote:
+      "The project showcase and critique module created a collaborative environment where I could showcase my work, receive valuable feedback, and refine my skills. It added a unique and valuable dimension to the learning process.",
+  },
+  {
+    name: "Brooklyn Simmons",
+    role: "UI/UX Designer",
+    avatar: "/images/avatar-6.webp",
+    rating: 5,
+    postedAgo: "a year ago",
+    quote:
+      "The lessons on optimizing digital assets for various platforms were particularly insightful. The course adapts to the evolving digital landscape, and the engaging content kept me motivated throughout.",
+  },
+];
