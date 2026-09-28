@@ -1,0 +1,146 @@
+/*
+ * The hero illustration is laid out on the 1440px Figma frame.
+ * `--u` is one design pixel at the current viewport; every coordinate below comes from the frame.
+ */
+.hero {
+  --u: calc(min(100vw, 1440px) / 1440);
+  --cu: max(var(--u), 0.62px);
+}
+
+@media (max-width: 767px) {
+  .hero {
+    --u: calc(100vw / 820);
+  }
+}
+
+/* A centred 1440u-wide box that keeps coordinates aligned to the frame at any viewport width. */
+.frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: calc(1440 * var(--u));
+  height: 100%;
+  margin-left: calc(-720 * var(--u));
+  pointer-events: none;
+}
+
+.visual {
+  position: relative;
+  left: 50%;
+  width: calc(1440 * var(--u));
+  height: calc(439 * var(--u));
+  margin-top: calc(72 * var(--u));
+  margin-left: calc(-720 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .visual {
+    margin-top: 56px;
+  }
+}
+
+/* Visual coordinates are relative to the circle's top edge (y = 585 in the frame). */
+.circle {
+  position: absolute;
+  left: calc(145 * var(--u));
+  top: 0;
+  width: calc(1150 * var(--u));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-lime-500);
+}
+
+.student {
+  position: absolute;
+  left: calc(496 * var(--u));
+  bottom: 0;
+  width: calc(520 * var(--u));
+}
+
+.topic {
+  position: absolute;
+  left: calc(404 * var(--u));
+  top: calc(53 * var(--u));
+}
+
+.progress {
+  position: absolute;
+  left: calc(842 * var(--u));
+  top: calc(65 * var(--u));
+}
+
+.students {
+  position: absolute;
+  left: calc(328 * var(--u));
+  top: calc(251 * var(--u));
+}
+
+@media (max-width: 767px) {
+  .topic {
+    display: none;
+  }
+
+  .progress {
+    left: calc(900 * var(--u));
+  }
+
+  .students {
+    left: calc(290 * var(--u));
+    top: calc(300 * var(--u));
+  }
+}
+
+.springLeft {
+  left: calc(-60 * var(--u));
+  top: calc(250 * var(--u));
+  width: calc(330 * var(--u));
+  aspect-ratio: 1;
+  rotate: 8deg;
+}
+
+.springSmall {
+  left: calc(196 * var(--u));
+  top: calc(478 * var(--u));
+  width: calc(150 * var(--u));
+  aspect-ratio: 1;
+  rotate: -58deg;
+}
+
+.cylinder {
+  left: calc(1215 * var(--u));
+  top: calc(250 * var(--u));
+  width: calc(340 * var(--u));
+  aspect-ratio: 1;
+  rotate: 35deg;
+}
+
+.pyramid {
+  left: calc(1100 * var(--u));
+  top: calc(462 * var(--u));
+  width: calc(185 * var(--u));
+  aspect-ratio: 1;
+  rotate: 30deg;
+}
+
+.torus {
+  left: calc(20 * var(--u));
+  top: calc(86 * var(--u));
+  width: calc(330 * var(--u));
+  aspect-ratio: 1;
+  rotate: 35deg;
+}
+
+.springRight {
+  left: calc(1130 * var(--u));
+  top: calc(80 * var(--u));
+  width: calc(300 * var(--u));
+  aspect-ratio: 1;
+  rotate: -10deg;
+}
+
+@media (max-width: 767px) {
+  .springSmall,
+  .pyramid {
+    display: none;
+  }
+}

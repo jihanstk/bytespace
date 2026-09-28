@@ -1,0 +1,7 @@
+.section {
+  background-color: var(--color-surface);
+  background-image:
+    radial-gradient(34rem 30rem at 50% 22%, rgb(212 251 32 / 0.35), transparent 70%),
+    radial-gradient(30rem 26rem at 96% 60%, rgb(212 251 32 / 0.4), transparent 70%),
+    radial-gradient(26rem 24rem at 4% 95%, rgb(80 110 255 / 0.3), transparent 70%);
+}

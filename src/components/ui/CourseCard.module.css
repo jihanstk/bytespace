@@ -1,0 +1,171 @@
+/* `--cu` is one design pixel, so the card can also be used inside scaled illustrations. */
+.card {
+  --unit: var(--cu, 1px);
+  display: flex;
+  flex-direction: column;
+  padding: calc(16 * var(--unit)) calc(16 * var(--unit)) calc(22 * var(--unit));
+  border: 1px solid var(--color-neutral-100);
+  border-radius: calc(20 * var(--unit));
+  background: var(--color-white);
+  color: var(--color-neutral-950);
+  font-family: var(--font-sans);
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo),
+    border-color 0.3s ease;
+}
+
+.interactive:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-neutral-200);
+  box-shadow: 0 24px 48px -24px rgb(8 20 80 / 0.28);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 341 / 195;
+  border-radius: calc(12 * var(--unit));
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.interactive:hover .image {
+  transform: scale(1.06);
+}
+
+.pills {
+  position: absolute;
+  inset-inline: calc(12 * var(--unit));
+  bottom: calc(12 * var(--unit));
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(8 * var(--unit));
+}
+
+.pill {
+  padding: calc(5 * var(--unit)) calc(11 * var(--unit));
+  border-radius: 999px;
+  background: rgb(206 208 211 / 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--color-neutral-600);
+  font-size: calc(12 * var(--unit));
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12 * var(--unit));
+  margin-top: calc(18 * var(--unit));
+}
+
+.title {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-heading);
+  font-size: calc(20 * var(--unit));
+  font-weight: 600;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(4 * var(--unit));
+  color: var(--color-neutral-600);
+  font-size: calc(18 * var(--unit));
+  line-height: 1;
+}
+
+.star {
+  width: calc(18 * var(--unit));
+  height: calc(18 * var(--unit));
+  color: var(--color-neutral-300);
+}
+
+.author {
+  margin-top: calc(4 * var(--unit));
+  font-size: calc(12 * var(--unit));
+  line-height: 1.6;
+}
+
+.author span {
+  color: var(--color-primary-800);
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--unit));
+  margin-top: calc(14 * var(--unit));
+}
+
+.level {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--unit));
+  height: calc(32 * var(--unit));
+  padding-inline: calc(12 * var(--unit));
+  border-radius: 999px;
+  background: var(--color-neutral-50);
+  font-size: calc(12 * var(--unit));
+}
+
+.levelIcon {
+  width: calc(16 * var(--unit));
+  height: calc(16 * var(--unit));
+}
+
+.learners {
+  display: flex;
+  align-items: center;
+}
+
+.learner,
+.more {
+  width: calc(28 * var(--unit));
+  height: calc(28 * var(--unit));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.learner {
+  margin-right: calc(-6 * var(--unit));
+  border: calc(1.5 * var(--unit)) solid var(--color-white);
+  object-fit: cover;
+}
+
+.more {
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: var(--color-lime-400);
+  font-size: calc(10 * var(--unit));
+  font-weight: 500;
+}
+
+.dark .more {
+  background: var(--color-neutral-950);
+  color: var(--color-white);
+}
+
+.price {
+  margin-top: calc(16 * var(--unit));
+  font-size: calc(12 * var(--unit));
+  line-height: 1.2;
+}
+
+.price strong {
+  color: var(--color-primary-800);
+  font-size: calc(20 * var(--unit));
+  font-weight: 700;
+}
