@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ByteSpace New
 
-## Getting Started
+Landing page, sign-in and registration screens for ByteSpace, an online course platform, implemented from the "ByteSpace New" Figma design.
 
-First, run the development server:
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org) (App Router) with React 19
+- TypeScript
+- Tailwind CSS v4, plus CSS Modules for the illustration compositions
+- [GSAP](https://gsap.com) with ScrollTrigger for entrance, reveal and parallax animations
+- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling, synced with ScrollTrigger
+
+## Development
+
+Requires Node.js 20.9 or newer.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Routes:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route       | Page          |
+| ----------- | ------------- |
+| `/`         | Landing page  |
+| `/login`    | Sign in       |
+| `/register` | Create account |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint   # ESLint
+```
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/                 routes, root layout, global tokens and fonts
+  components/
+    layout/            header, footer, logo, newsletter form
+    sections/          landing page sections
+    auth/              shared layout, form and illustration for auth pages
+    ui/                buttons, cards, icons, 3D ornaments
+    motion/            smooth scrolling and page animation controller
+  lib/                 page content and GSAP setup
+public/
+  images/ logos/ icons/
+```
 
-## Deploy on Vercel
+Design tokens (colours, type scale, spacing helpers) live in `src/app/globals.css` and mirror the Figma style guide. Decorative illustrations are positioned on their Figma coordinates and scale with the viewport through a `--u` design-pixel unit.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Animations are driven by data attributes so sections can stay Server Components:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `data-intro="n"` — entrance sequence on page load, ordered by `n`
+- `data-reveal` — fade-up when scrolled into view
+- `data-parallax="n"` — scroll-linked drift of `n` pixels
+
+All motion is disabled when the visitor prefers reduced motion.
+
+## Deployment
+
+The project deploys to [Vercel](https://vercel.com) with the default Next.js settings; no environment variables are required.
