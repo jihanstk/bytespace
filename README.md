@@ -1,6 +1,6 @@
 # ByteSpace New
 
-Landing page, sign-in and registration screens for ByteSpace, an online course platform, implemented from the "ByteSpace New" Figma design.
+Landing, course search, course details, sign-in and registration pages for ByteSpace, an online course platform, implemented from the "ByteSpace New" Figma design.
 
 ## Tech Stack
 
@@ -21,11 +21,13 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000). Routes:
 
-| Route       | Page          |
-| ----------- | ------------- |
-| `/`         | Landing page  |
-| `/login`    | Sign in       |
-| `/register` | Create account |
+| Route             | Page                                    |
+| ----------------- | --------------------------------------- |
+| `/`               | Landing page                            |
+| `/search`         | Course search with filters (`?q=` supported) |
+| `/courses/[slug]` | Course details                          |
+| `/login`          | Sign in                                 |
+| `/register`       | Create account                          |
 
 ```bash
 npm run lint   # ESLint
@@ -47,9 +49,11 @@ src/
     layout/            header, footer, logo, newsletter form
     sections/          landing page sections
     auth/              shared layout, form and illustration for auth pages
+    search/            search results with filters and pagination
+    course/            course details sidebar, tabs and share button
     ui/                buttons, cards, icons, 3D ornaments
     motion/            smooth scrolling and page animation controller
-  lib/                 page content and GSAP setup
+  lib/                 page and course content, GSAP setup
 public/
   images/ logos/ icons/
 ```
