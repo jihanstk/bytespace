@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import CourseSidebar from "@/components/course/CourseSidebar";
 import CourseTabs from "@/components/course/CourseTabs";
@@ -8,7 +9,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { LevelIcon, PlayIcon, StarIcon, UsersIcon } from "@/components/ui/icons";
 import { courseMeta, courses } from "@/lib/content";
-import { getCourse } from "@/lib/course-details";
+import { creatorHref, getCourse } from "@/lib/course-details";
 
 export function generateStaticParams() {
   return courses.map((course) => ({ slug: course.slug }));
@@ -55,7 +56,10 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
             </div>
 
             <p data-intro="2" className="mt-5 text-body-l text-white">
-              by <span className="text-lime-400">{courseMeta.author}</span>
+              by{" "}
+              <Link href={creatorHref} className="text-lime-400 hover:underline">
+                {courseMeta.author}
+              </Link>
             </p>
             <ul data-intro="2" className="mt-5 flex flex-wrap gap-3 md:gap-4">
               {stats.map(({ icon: Icon, label }) => (

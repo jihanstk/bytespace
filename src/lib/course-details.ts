@@ -223,7 +223,17 @@ export const courseIncludes = [
 ] as const;
 
 export const creator = {
+  slug: "purepearl-studio",
   name: "PurePearl Studio",
   role: "Professional Creator",
+  headline: "Passionate UI/UX, Web designer",
   avatar: "/images/creator-purepearl.webp",
+  profilePhoto: "/images/creator-profile.webp",
+  followers: 12,
+  bio: [
+    "Welcome to the creative world of PurePearl Studio. Here, you'll discover the passion, expertise, and inspiration that drive my creative journey. Let's explore and learn together!",
+    "Dive into my creative portfolio, showcasing a glimpse of my artistic endeavors. From digital designs to multimedia projects, each piece tells a unique story. Explore the world of creativity with me.",
+  ],
 };
+
+export const creatorHref = `/creators/${creator.slug}`;

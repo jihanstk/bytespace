@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LinkButton } from "@/components/ui/Button";
 import { CertificateIcon, ConsultationIcon, ResourcesIcon, VideoIcon } from "@/components/ui/icons";
 import { courseMeta } from "@/lib/content";
-import { courseIncludes, creator, type CourseDetail } from "@/lib/course-details";
+import { courseIncludes, creator, creatorHref, type CourseDetail } from "@/lib/course-details";
 
 const includeIcons = {
   resources: ResourcesIcon,
@@ -67,7 +67,7 @@ export default function CourseSidebar({ detail }: { detail: CourseDetail }) {
       </div>
       <p className="mt-6 text-body-m text-neutral-600">{pitch}</p>
       <Link
-        href={`/search?q=${encodeURIComponent(courseMeta.author)}`}
+        href={creatorHref}
         className="mt-4 inline-flex h-8.5 items-center rounded-full border border-neutral-200 px-4 text-body-s font-medium text-neutral-950 transition-colors hover:border-neutral-950"
       >
         See Full Profile
