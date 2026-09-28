@@ -1,0 +1,148 @@
+/*
+ * Floating stat cards used inside scaled illustrations.
+ * `--cu` is one design pixel; parents set it so cards scale with their composition.
+ */
+.card {
+  --unit: var(--cu, 1px);
+  background: var(--color-white);
+  border-radius: calc(12 * var(--unit));
+  box-shadow: 0 calc(12 * var(--unit)) calc(32 * var(--unit)) calc(-12 * var(--unit)) rgb(8 20 80 / 0.25);
+  color: var(--color-neutral-950);
+  font-family: var(--font-sans);
+}
+
+.topic {
+  padding: calc(12 * var(--unit)) calc(16 * var(--unit)) calc(14 * var(--unit));
+}
+
+.title {
+  font-size: calc(16 * var(--unit));
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--unit));
+  margin-top: calc(4 * var(--unit));
+  color: var(--color-neutral-400);
+  font-size: calc(12 * var(--unit));
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.dot {
+  width: calc(3 * var(--unit));
+  height: calc(3 * var(--unit));
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.progress {
+  width: calc(230 * var(--unit));
+  padding: calc(16 * var(--unit));
+}
+
+.progressLabel {
+  font-size: calc(14 * var(--unit));
+  line-height: 1.2;
+}
+
+.progressValue {
+  margin-top: calc(8 * var(--unit));
+  font-size: calc(44 * var(--unit));
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.track {
+  height: calc(8 * var(--unit));
+  margin-top: calc(10 * var(--unit));
+  border-radius: 999px;
+  background: var(--color-neutral-50);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-lime-400);
+}
+
+.students {
+  padding: calc(14 * var(--unit)) calc(16 * var(--unit)) calc(16 * var(--unit));
+}
+
+.lime {
+  background: var(--color-lime-400);
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: calc(3 * var(--unit));
+  margin-top: calc(4 * var(--unit));
+  font-size: calc(12 * var(--unit));
+  line-height: 1.2;
+}
+
+.muted {
+  color: var(--color-neutral-400);
+}
+
+.lime .muted {
+  color: var(--color-neutral-500);
+}
+
+.star {
+  width: calc(14 * var(--unit));
+  height: calc(14 * var(--unit));
+  color: var(--color-lime-400);
+}
+
+.lime .star {
+  color: var(--color-primary-800);
+}
+
+.avatars {
+  display: flex;
+  align-items: center;
+  margin-top: calc(12 * var(--unit));
+}
+
+.avatar,
+.more {
+  width: calc(36 * var(--unit));
+  height: calc(36 * var(--unit));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar {
+  margin-right: calc(-8 * var(--unit));
+  border: calc(2 * var(--unit)) solid var(--color-white);
+  object-fit: cover;
+}
+
+.lime .avatar {
+  border-color: var(--color-lime-400);
+}
+
+.more {
+  display: grid;
+  place-items: center;
+  margin-left: calc(2 * var(--unit));
+  background: var(--color-lime-400);
+  border: calc(2 * var(--unit)) solid var(--color-white);
+  font-size: calc(12 * var(--unit));
+  font-weight: 700;
+  position: relative;
+}
+
+.lime .more {
+  background: var(--color-neutral-950);
+  border-color: var(--color-lime-400);
+  color: var(--color-white);
+}

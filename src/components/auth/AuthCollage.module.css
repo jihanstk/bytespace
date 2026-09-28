@@ -1,0 +1,58 @@
+/* Collage drawn on its Figma coordinates (495 × 558); `--u` is one design pixel. */
+.stage {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 495px;
+}
+
+.canvas {
+  --u: calc(100cqw / 495);
+  --cu: var(--u);
+  position: relative;
+  aspect-ratio: 495 / 558;
+}
+
+.item {
+  position: absolute;
+}
+
+.backCard {
+  left: 0;
+  top: calc(89 * var(--u));
+  width: calc(372 * var(--u));
+}
+
+.frontCard {
+  left: calc(112 * var(--u));
+  top: 0;
+  width: calc(371 * var(--u));
+}
+
+.torus {
+  left: calc(22 * var(--u));
+  top: calc(10 * var(--u));
+  width: calc(160 * var(--u));
+  aspect-ratio: 1;
+  rotate: 30deg;
+}
+
+.students {
+  left: calc(226 * var(--u));
+  top: calc(435 * var(--u));
+}
+
+.spring {
+  left: calc(350 * var(--u));
+  top: calc(318 * var(--u));
+  width: calc(175 * var(--u));
+  aspect-ratio: 1;
+  rotate: -60deg;
+}
+
+.pyramid {
+  left: calc(-22 * var(--u));
+  top: calc(395 * var(--u));
+  width: calc(180 * var(--u));
+  aspect-ratio: 1;
+  rotate: -10deg;
+}
