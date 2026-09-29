@@ -130,6 +130,18 @@
     outline: 2px solid var(--color-lime-400);
     outline-offset: 3px;
   }
+
+  /* Keep each field's own background when the browser autofills it; the tint can't be overridden directly, so it's delayed indefinitely. */
+  input:autofill,
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-neutral-950);
+    caret-color: var(--color-neutral-950);
+    transition:
+      background-color 100000s ease 0s,
+      color 100000s ease 0s;
+  }
 }
 
 /* Elements animated by GSAP start hidden only when JS and motion are available. */
