@@ -44,7 +44,7 @@ export default function PillSelect({
         aria-label={label}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="absolute inset-0 cursor-pointer appearance-none opacity-0"
+        className="absolute inset-0 cursor-pointer appearance-none opacity-0 outline-none"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

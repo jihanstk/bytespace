@@ -2,14 +2,14 @@
 
 import { useRef, useState } from "react";
 import CourseCard from "@/components/ui/CourseCard";
-import { courseCategoryRows, courses, FEATURED } from "@/lib/content";
+import { courseCategoryRows, featuredCourses, FEATURED } from "@/lib/content";
 import { getCreator } from "@/lib/creators";
 import { gsap, useGSAP, REDUCED_MOTION } from "@/lib/gsap";
 
 export default function CourseExplorer() {
   const [active, setActive] = useState(FEATURED);
   const grid = useRef<HTMLDivElement>(null);
-  const visible = active === FEATURED ? courses : courses.filter((course) => course.categories.includes(active));
+  const visible = active === FEATURED ? featuredCourses : featuredCourses.filter((course) => course.categories.includes(active));
 
   const { contextSafe } = useGSAP({ scope: grid });
   const selectCategory = contextSafe((category: string) => {

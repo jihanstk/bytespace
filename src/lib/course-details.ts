@@ -246,9 +246,51 @@ const details: Record<string, CourseDetail> = {
   },
 };
 
+type CatalogEntry = Pick<CourseDetail, "subtitle" | "level" | "rating" | "reviews" | "students">;
+
+/** Catalogue courses without a hand-written page get a detail page generated from these essentials. */
+const catalogEntries: Record<string, CatalogEntry> = {
+  "wireframing-essentials": { subtitle: "Sketch, structure and test ideas before you design", level: "Beginner", rating: "4.6", reviews: 88, students: 214 },
+  "designing-dark-mode-interfaces": { subtitle: "Colour, contrast and depth for low-light interfaces", level: "Intermediate", rating: "4.5", reviews: 64, students: 158 },
+  "building-a-portfolio-website": { subtitle: "Design and publish a portfolio that gets you hired", level: "Intermediate", rating: "4.7", reviews: 112, students: 263 },
+  "mobile-app-ui-design": { subtitle: "Craft touch-friendly screens for iOS and Android", level: "Beginner", rating: "4.6", reviews: 97, students: 241 },
+  "icon-design-fundamentals": { subtitle: "Draw consistent, pixel-perfect icon sets", level: "Beginner", rating: "4.4", reviews: 51, students: 132 },
+  "data-visualization-dashboards": { subtitle: "Turn metrics into dashboards people actually use", level: "Advanced", rating: "4.5", reviews: 73, students: 176 },
+  "pitching-your-startup": { subtitle: "Tell a story investors and customers remember", level: "Intermediate", rating: "4.6", reviews: 69, students: 149 },
+  "presenting-on-camera": { subtitle: "Look and sound confident in every video", level: "Beginner", rating: "4.5", reviews: 58, students: 137 },
+  "investing-basics-for-creators": { subtitle: "Grow your savings with simple, steady habits", level: "Beginner", rating: "4.4", reviews: 46, students: 121 },
+  "pricing-your-creative-work": { subtitle: "Charge what you're worth and explain it clearly", level: "Intermediate", rating: "4.6", reviews: 82, students: 198 },
+  "home-studio-setup": { subtitle: "Build a workspace that keeps you focused", level: "Beginner", rating: "4.5", reviews: 41, students: 109 },
+  "remote-team-collaboration": { subtitle: "Communicate and ship together from anywhere", level: "Advanced", rating: "4.4", reviews: 37, students: 96 },
+};
+
+function generateDetail(course: Course, entry: CatalogEntry): CourseDetail {
+  return {
+    ...entry,
+    heading: course.title,
+    lessonCount: 17,
+    moreVideos: 14,
+    hours: 2,
+    videoPoster: course.image,
+    lessons: [
+      { title: `Welcome to ${course.title}`, duration: "8 mins" },
+      { title: "Core Concepts and Tools", duration: "16 mins" },
+      { title: "Hands-on Project", duration: "22 mins" },
+    ],
+    description: [
+      `${course.title} is a focused, practical course: ${entry.subtitle.toLowerCase()}. Short video lessons explain each idea, and guided exercises help you apply it straight away.`,
+      "By the end you'll have completed a small project you can share, along with templates and notes to keep using afterwards.",
+    ],
+    sneakPeek,
+    keyPoints: ["Core Concepts", "Tools and Workflow", "Guided Exercises", "Real-world Project", "Next Steps"],
+  };
+}
+
 export function getCourse(slug: string): (Course & { detail: CourseDetail }) | undefined {
   const course = courses.find((item) => item.slug === slug);
-  return course && { ...course, detail: details[course.slug] };
+  if (!course) return undefined;
+  const detail = details[course.slug] ?? generateDetail(course, catalogEntries[course.slug]);
+  return { ...course, detail };
 }
 
 export const courseIncludes = [
