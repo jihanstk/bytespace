@@ -3,7 +3,8 @@ import Link from "next/link";
 import { LinkButton } from "@/components/ui/Button";
 import { CertificateIcon, ConsultationIcon, ResourcesIcon, VideoIcon } from "@/components/ui/icons";
 import { courseMeta } from "@/lib/content";
-import { courseIncludes, creator, creatorHref, type CourseDetail } from "@/lib/course-details";
+import { courseIncludes, type CourseDetail } from "@/lib/course-details";
+import { creatorHref, type Creator } from "@/lib/creators";
 
 const includeIcons = {
   resources: ResourcesIcon,
@@ -15,7 +16,7 @@ const includeIcons = {
 const pitch = "Ready to Dive In? Enroll Now and Start Building Your Digital Future!";
 const heading = "font-heading text-heading-xs font-semibold text-neutral-950";
 
-export default function CourseSidebar({ detail }: { detail: CourseDetail }) {
+export default function CourseSidebar({ detail, creator }: { detail: CourseDetail; creator: Creator }) {
   return (
     <aside
       aria-label="Enrollment"
@@ -59,7 +60,7 @@ export default function CourseSidebar({ detail }: { detail: CourseDetail }) {
       <hr className="my-8 border-neutral-200" />
 
       <div className="flex items-center gap-3">
-        <Image src={creator.avatar} alt="" width={52} height={52} className="size-13 rounded-full object-cover" />
+        <Image src={creator.photo} alt="" width={52} height={52} className="size-13 rounded-full object-cover" />
         <div>
           <p className="text-label-l font-medium text-neutral-950">{creator.name}</p>
           <p className="mt-1 text-body-m leading-[1.2] text-neutral-600">{creator.role}</p>
@@ -67,7 +68,7 @@ export default function CourseSidebar({ detail }: { detail: CourseDetail }) {
       </div>
       <p className="mt-6 text-body-m text-neutral-600">{pitch}</p>
       <Link
-        href={creatorHref}
+        href={creatorHref(creator.slug)}
         className="mt-4 inline-flex h-8.5 items-center rounded-full border border-neutral-200 px-4 text-body-s font-medium text-neutral-950 transition-colors hover:border-neutral-950"
       >
         See Full Profile

@@ -5,20 +5,25 @@ import FollowControls from "@/components/creator/FollowControls";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import CourseBrowser from "@/components/search/CourseBrowser";
-import { courses } from "@/lib/content";
-import { creator } from "@/lib/course-details";
+import { coursesBy, creators, getCreator } from "@/lib/creators";
 
 export function generateStaticParams() {
-  return [{ slug: creator.slug }];
+  return creators.map((creator) => ({ slug: creator.slug }));
 }
 
-export const metadata: Metadata = {
-  title: creator.name,
-  description: `${creator.name} — ${creator.headline}. Browse their courses on ByteSpace.`,
-};
+export async function generateMetadata({ params }: PageProps<"/creators/[slug]">): Promise<Metadata> {
+  const creator = getCreator((await params).slug);
+  if (!creator) return {};
+  return {
+    title: creator.name,
+    description: `${creator.name} — ${creator.headline}. Browse their courses on ByteSpace.`,
+    openGraph: { images: [{ url: creator.photo }] },
+  };
+}
 
 export default async function CreatorPage({ params }: PageProps<"/creators/[slug]">) {
-  if ((await params).slug !== creator.slug) notFound();
+  const creator = getCreator((await params).slug);
+  if (!creator) notFound();
 
   return (
     <>
@@ -28,7 +33,7 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
           <div className="container-page text-white">
             <div data-intro="1" className="flex items-center gap-4 md:gap-6">
               <Image
-                src={creator.profilePhoto}
+                src={creator.photo}
                 alt=""
                 width={96}
                 height={96}
@@ -55,12 +60,18 @@ export default async function CreatorPage({ params }: PageProps<"/creators/[slug
             </div>
 
             <div data-intro="3">
-              <FollowControls products={courses.length} followers={creator.followers} />
+              <FollowControls products={coursesBy(creator.slug).length} followers={creator.followers} />
             </div>
           </div>
         </section>
 
-        <CourseBrowser label={`Courses by ${creator.name}`} chipsOpen={false} paginate={false} className="pt-12 pb-16 md:pt-16" />
+        <CourseBrowser
+          label={`Courses by ${creator.name}`}
+          creator={creator.slug}
+          chipsOpen={false}
+          paginate={false}
+          className="pt-12 pb-16 md:pt-16"
+        />
       </main>
       <Footer bordered />
     </>

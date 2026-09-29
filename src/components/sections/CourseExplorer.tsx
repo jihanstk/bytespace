@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import CourseCard from "@/components/ui/CourseCard";
 import { courseCategoryRows, courses, FEATURED } from "@/lib/content";
+import { getCreator } from "@/lib/creators";
 import { gsap, useGSAP, REDUCED_MOTION } from "@/lib/gsap";
 
 export default function CourseExplorer() {
@@ -58,7 +59,7 @@ export default function CourseExplorer() {
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {visible.map((course) => (
               <li key={course.title} className="min-w-0">
-                <CourseCard course={course} href={`/courses/${course.slug}`} />
+                <CourseCard course={course} href={`/courses/${course.slug}`} author={getCreator(course.creator)?.name} />
               </li>
             ))}
           </ul>

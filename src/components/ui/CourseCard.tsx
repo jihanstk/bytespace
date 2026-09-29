@@ -9,6 +9,7 @@ type CourseCardProps = {
   /** Makes the whole card a link to this URL. */
   href?: string;
   level?: string;
+  author?: string;
   /** Hover lift and image zoom; disabled when the card is purely illustrative. */
   interactive?: boolean;
   /** Dark "more learners" badge, used where the card sits on a lime background. */
@@ -21,12 +22,13 @@ export default function CourseCard({
   course,
   href,
   level = courseMeta.level,
+  author = "purepearl studio",
   interactive = true,
   darkBadge = false,
   sizes = "(min-width: 1280px) 341px, (min-width: 768px) 45vw, 90vw",
   className = "",
 }: CourseCardProps) {
-  const { lessons, duration, comments, rating, author, price, learners, learnersMore } = courseMeta;
+  const { lessons, duration, comments, rating, price, learners, learnersMore } = courseMeta;
 
   return (
     <article

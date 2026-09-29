@@ -8,8 +8,9 @@ import ShareButton from "@/components/course/ShareButton";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { LevelIcon, PlayIcon, StarIcon, UsersIcon } from "@/components/ui/icons";
-import { courseMeta, courses } from "@/lib/content";
-import { creatorHref, getCourse } from "@/lib/course-details";
+import { courses } from "@/lib/content";
+import { getCourse } from "@/lib/course-details";
+import { creatorHref, getCreator } from "@/lib/creators";
 
 export function generateStaticParams() {
   return courses.map((course) => ({ slug: course.slug }));
@@ -29,6 +30,7 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
   const course = getCourse((await params).slug);
   if (!course) notFound();
   const { detail } = course;
+  const creator = getCreator(course.creator)!;
 
   const stats = [
     { icon: LevelIcon, label: detail.level },
@@ -57,8 +59,8 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
 
             <p data-intro="2" className="mt-5 text-body-l text-white">
               by{" "}
-              <Link href={creatorHref} className="text-lime-400 hover:underline">
-                {courseMeta.author}
+              <Link href={creatorHref(creator.slug)} className="text-lime-400 hover:underline">
+                {creator.name}
               </Link>
             </p>
             <ul data-intro="2" className="mt-5 flex flex-wrap gap-3 md:gap-4">
@@ -88,7 +90,7 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
               </div>
               <div data-intro="3" className="lg:relative">
                 <div className="lg:absolute lg:inset-x-0 lg:top-0">
-                  <CourseSidebar detail={detail} />
+                  <CourseSidebar detail={detail} creator={creator} />
                 </div>
               </div>
             </div>

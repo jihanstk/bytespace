@@ -4,8 +4,9 @@ import { useMemo, useRef, useState } from "react";
 import CourseCard from "@/components/ui/CourseCard";
 import { CategoryIcon, ChevronLeftIcon, ChevronRightIcon, FilterIcon, LevelIcon, SortIcon } from "@/components/ui/icons";
 import PillSelect from "@/components/ui/PillSelect";
-import { courseCategories, courseMeta, courses, FEATURED } from "@/lib/content";
+import { courseCategories, courses, FEATURED } from "@/lib/content";
 import { getCourse, type CourseDetail } from "@/lib/course-details";
+import { getCreator } from "@/lib/creators";
 import { gsap, useGSAP, REDUCED_MOTION } from "@/lib/gsap";
 
 const PAGE_SIZE = 9;
@@ -42,7 +43,11 @@ const categoryOptions = [
   ...courseCategories.filter((category) => category !== FEATURED).map((category) => ({ value: category, label: category })),
 ];
 
-const catalog = courses.map((course) => ({ ...course, detail: getCourse(course.slug)!.detail }));
+const catalog = courses.map((course) => ({
+  ...course,
+  detail: getCourse(course.slug)!.detail,
+  author: getCreator(course.creator)!.name,
+}));
 
 export type SearchScope = "courses" | "creators";
 
@@ -53,11 +58,12 @@ const sorters: Record<string, (a: CourseDetail, b: CourseDetail) => number> = {
   rating: (a, b) => Number(b.rating) - Number(a.rating) || b.reviews - a.reviews,
 };
 
-function filterCatalog(query: string, scope: SearchScope, { level, category, sort }: Filters) {
+function filterCatalog(query: string, scope: SearchScope, creator: string | undefined, { level, category, sort }: Filters) {
   const needle = query.trim().toLowerCase();
   const matches = catalog.filter((course) => {
-    const haystack = scope === "creators" ? courseMeta.author : `${course.title} ${course.detail.heading} ${course.categories.join(" ")}`;
+    const haystack = scope === "creators" ? course.author : `${course.title} ${course.detail.heading} ${course.categories.join(" ")}`;
     return (
+      (!creator || course.creator === creator) &&
       (!needle || haystack.toLowerCase().includes(needle)) &&
       (!level || course.detail.level === level) &&
       (!category || course.categories.includes(category))
@@ -72,6 +78,8 @@ type CourseBrowserProps = {
   label: string;
   query?: string;
   scope?: SearchScope;
+  /** Limit results to one creator's courses. */
+  creator?: string;
   /** Whether the category chips start expanded; the Filter button toggles them. */
   chipsOpen?: boolean;
   paginate?: boolean;
@@ -83,6 +91,7 @@ export default function CourseBrowser({
   label,
   query = "",
   scope = "courses",
+  creator,
   chipsOpen = true,
   paginate = true,
   className = "",
@@ -92,7 +101,7 @@ export default function CourseBrowser({
   const [showCategories, setShowCategories] = useState(chipsOpen);
   const [page, setPage] = useState(1);
 
-  const matches = useMemo(() => filterCatalog(query, scope, filters), [query, scope, filters]);
+  const matches = useMemo(() => filterCatalog(query, scope, creator, filters), [query, scope, creator, filters]);
   const pageSize = paginate ? PAGE_SIZE : matches.length;
   const pageCount = Math.max(1, Math.ceil(matches.length / Math.max(pageSize, 1)));
   const visible = matches.slice((page - 1) * pageSize, page * pageSize);
@@ -185,7 +194,7 @@ export default function CourseBrowser({
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {visible.map((course) => (
               <li key={course.slug} className="min-w-0">
-                <CourseCard course={course} href={`/courses/${course.slug}`} level={course.detail.level} />
+                <CourseCard course={course} href={`/courses/${course.slug}`} level={course.detail.level} author={course.author} />
               </li>
             ))}
           </ul>
