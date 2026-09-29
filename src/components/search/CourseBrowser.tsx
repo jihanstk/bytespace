@@ -4,16 +4,19 @@ import { useMemo, useRef, useState } from "react";
 import CourseCard from "@/components/ui/CourseCard";
 import { CategoryIcon, ChevronLeftIcon, ChevronRightIcon, FilterIcon, LevelIcon, SortIcon } from "@/components/ui/icons";
 import PillSelect from "@/components/ui/PillSelect";
-import { courseCategories, courses, FEATURED } from "@/lib/content";
+import { courseCategories, courses, FEATURED, featuredCourses } from "@/lib/content";
 import { getCourse, type CourseDetail } from "@/lib/course-details";
 import { getCreator } from "@/lib/creators";
 import { gsap, useGSAP, REDUCED_MOTION } from "@/lib/gsap";
 import { scrollToElement } from "@/lib/smooth-scroll";
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 10;
+const ALL = "All";
+const featuredSlugs = new Set(featuredCourses.map((course) => course.slug));
 
 /** Quick filters shown as chips, as in the design; every category remains available in the Category menu. */
 const quickCategories = [
+  ALL,
   FEATURED,
   "Music",
   "Drawing & Painting",
@@ -67,7 +70,7 @@ function filterCatalog(query: string, scope: SearchScope, creator: string | unde
       (!creator || course.creator === creator) &&
       (!needle || haystack.toLowerCase().includes(needle)) &&
       (!level || course.detail.level === level) &&
-      (!category || course.categories.includes(category))
+      (!category || (category === FEATURED ? featuredSlugs.has(course.slug) : course.categories.includes(category)))
     );
   });
 
@@ -132,7 +135,7 @@ export default function CourseBrowser({
     animateResults();
   };
 
-  const activeChip = filters.category || FEATURED;
+  const activeChip = filters.category || ALL;
   const chipsId = `${label.toLowerCase().replace(/\W+/g, "-")}-categories`;
 
   return (
@@ -182,14 +185,14 @@ export default function CourseBrowser({
         hidden={!showCategories}
         className="-mx-(--page-gutter) mt-8 overflow-x-auto px-(--page-gutter) pb-2 [scrollbar-width:none] md:mt-8.5"
       >
-        <div className="flex w-max gap-3 md:gap-4 xl:w-full xl:justify-between">
+        <div className="flex w-max gap-3 md:gap-4 xl:w-full xl:justify-between xl:gap-3">
           {quickCategories.map((category) => (
             <button
               key={category}
               type="button"
               aria-pressed={activeChip === category}
-              onClick={() => update({ category: category === FEATURED ? "" : category })}
-              className="h-10.75 shrink-0 rounded-full bg-neutral-50 px-4 text-label-m font-medium whitespace-nowrap text-neutral-950 transition-colors hover:bg-neutral-100 aria-pressed:bg-lime-400"
+              onClick={() => update({ category: category === ALL ? "" : category })}
+              className="h-10.75 shrink-0 rounded-full bg-neutral-50 px-4 xl:px-3.5 text-label-m font-medium whitespace-nowrap text-neutral-950 transition-colors hover:bg-neutral-100 aria-pressed:bg-lime-400"
             >
               {category}
             </button>
