@@ -8,6 +8,7 @@ import { courseCategories, courses, FEATURED } from "@/lib/content";
 import { getCourse, type CourseDetail } from "@/lib/course-details";
 import { getCreator } from "@/lib/creators";
 import { gsap, useGSAP, REDUCED_MOTION } from "@/lib/gsap";
+import { scrollToElement } from "@/lib/smooth-scroll";
 
 const PAGE_SIZE = 9;
 
@@ -96,6 +97,7 @@ export default function CourseBrowser({
   paginate = true,
   className = "",
 }: CourseBrowserProps) {
+  const section = useRef<HTMLElement>(null);
   const results = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useState<Filters>({ level: "", category: "", sort: "relevant" });
   const [showCategories, setShowCategories] = useState(chipsOpen);
@@ -124,11 +126,17 @@ export default function CourseBrowser({
     animateResults();
   };
 
+  const goToPage = (next: number) => {
+    setPage(next);
+    if (section.current) scrollToElement(section.current, -96);
+    animateResults();
+  };
+
   const activeChip = filters.category || FEATURED;
   const chipsId = `${label.toLowerCase().replace(/\W+/g, "-")}-categories`;
 
   return (
-    <section aria-label={label} className={`container-page ${className}`}>
+    <section ref={section} aria-label={label} className={`container-page scroll-mt-24 ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-3 md:gap-4">
           <button
@@ -211,7 +219,7 @@ export default function CourseBrowser({
             type="button"
             aria-label="Previous page"
             disabled={page === 1}
-            onClick={() => setPage((current) => current - 1)}
+            onClick={() => goToPage(page - 1)}
             className="grid size-10 place-items-center rounded-full text-neutral-950 transition-colors hover:bg-neutral-50 disabled:text-neutral-300 disabled:hover:bg-transparent"
           >
             <ChevronLeftIcon className="size-5" />
@@ -222,7 +230,7 @@ export default function CourseBrowser({
               type="button"
               aria-label={`Page ${number}`}
               aria-current={number === page ? "page" : undefined}
-              onClick={() => setPage(number)}
+              onClick={() => goToPage(number)}
               className="grid size-10 place-items-center rounded-full text-label-m font-medium text-neutral-950 transition-colors hover:bg-neutral-50 aria-[current=page]:bg-primary-800 aria-[current=page]:text-white"
             >
               {number}
@@ -232,7 +240,7 @@ export default function CourseBrowser({
             type="button"
             aria-label="Next page"
             disabled={page === pageCount}
-            onClick={() => setPage((current) => current + 1)}
+            onClick={() => goToPage(page + 1)}
             className="grid size-10 place-items-center rounded-full text-neutral-950 transition-colors hover:bg-neutral-50 disabled:text-neutral-300 disabled:hover:bg-transparent"
           >
             <ChevronRightIcon className="size-5" />
