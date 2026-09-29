@@ -39,7 +39,22 @@ export const courses: Course[] = [
   { slug: "balancing-productivity-and-wellbeing", title: "Balancing Productivity and Wellbeing", image: "/images/course-productivity.webp", categories: ["Productivity"], creator: "jacob-jones" },
   { slug: "mastering-money-management", title: "Mastering Money Management", image: "/images/course-money.webp", categories: ["Freelance & Entrepreneurship", "Marketing"], creator: "kristin-watson" },
   { slug: "from-idea-to-startup-success", title: "From Idea to Startup Success", image: "/images/course-startup.webp", categories: ["Freelance & Entrepreneurship", "Marketing", "Social Media", "Creative Marketing"], creator: "wade-warren" },
+  { slug: "wireframing-essentials", title: "Wireframing Essentials", image: "/images/sneak-peek-1.webp", categories: ["UI/UX Design", "Drawing & Painting"], creator: "purepearl-studio" },
+  { slug: "designing-dark-mode-interfaces", title: "Designing Dark Mode Interfaces", image: "/images/sneak-peek-2.webp", categories: ["UI/UX Design", "Graphic Design"], creator: "purepearl-studio" },
+  { slug: "building-a-portfolio-website", title: "Building a Portfolio Website", image: "/images/sneak-peek-3.webp", categories: ["Web Development", "UI/UX Design"], creator: "purepearl-studio" },
+  { slug: "mobile-app-ui-design", title: "Mobile App UI Design", image: "/images/sneak-peek-4.webp", categories: ["UI/UX Design", "Animation"], creator: "purepearl-studio" },
+  { slug: "icon-design-fundamentals", title: "Icon Design Fundamentals", image: "/images/course-digital-asset.webp", categories: ["Digital Illustration", "Graphic Design"], creator: "purepearl-studio" },
+  { slug: "data-visualization-dashboards", title: "Data Visualization Dashboards", image: "/images/course-big-data.webp", categories: ["Data Science", "Web Development"], creator: "wade-warren" },
+  { slug: "pitching-your-startup", title: "Pitching Your Startup", image: "/images/course-startup.webp", categories: ["Freelance & Entrepreneurship", "Creative Marketing"], creator: "wade-warren" },
+  { slug: "presenting-on-camera", title: "Presenting on Camera", image: "/images/course-video-poster.webp", categories: ["Film & Video", "Social Media"], creator: "wade-warren" },
+  { slug: "investing-basics-for-creators", title: "Investing Basics for Creators", image: "/images/course-money.webp", categories: ["Freelance & Entrepreneurship", "Marketing"], creator: "kristin-watson" },
+  { slug: "pricing-your-creative-work", title: "Pricing Your Creative Work", image: "/images/course-figma.webp", categories: ["Freelance & Entrepreneurship", "Crafts"], creator: "kristin-watson" },
+  { slug: "home-studio-setup", title: "Setting Up a Productive Home Studio", image: "/images/course-productivity.webp", categories: ["Productivity", "Music"], creator: "jacob-jones" },
+  { slug: "remote-team-collaboration", title: "Remote Team Collaboration", image: "/images/course-startup.webp", categories: ["Productivity", "Social Media"], creator: "jacob-jones" },
 ];
+
+/** The original six courses highlighted on the landing page. */
+export const featuredCourses = courses.slice(0, 6);
 
 export const courseCategories = courseCategoryRows.flat();
 
