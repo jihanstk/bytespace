@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import CourseBrowser, { type SearchScope } from "@/components/search/CourseBrowser";
 import { SearchIcon } from "@/components/ui/icons";
 import PillSelect from "@/components/ui/PillSelect";
+
+const SEARCH_DELAY = 500;
 
 const scopes = [
   { value: "courses", label: "Courses" },
@@ -12,15 +13,30 @@ const scopes = [
 ];
 
 export default function SearchResults({ initialQuery }: { initialQuery: string }) {
-  const router = useRouter();
   const [draft, setDraft] = useState(initialQuery);
   const [query, setQuery] = useState(initialQuery);
   const [scope, setScope] = useState<SearchScope>("courses");
+  const timer = useRef<number>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  useEffect(() => {
+    const trimmed = query.trim();
+    window.history.replaceState(null, "", trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : "/search");
+  }, [query]);
+
+  // Results follow the typed text once typing pauses; pressing Enter applies it straight away.
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setDraft(value);
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setQuery(value), SEARCH_DELAY);
+  };
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    window.clearTimeout(timer.current);
     setQuery(draft);
-    router.replace(draft.trim() ? `/search?q=${encodeURIComponent(draft.trim())}` : "/search", { scroll: false });
   };
 
   return (
@@ -38,7 +54,7 @@ export default function SearchResults({ initialQuery }: { initialQuery: string }
                 type="search"
                 name="q"
                 value={draft}
-                onChange={(event) => setDraft(event.target.value)}
+                onChange={handleChange}
                 placeholder="Search"
                 className="h-full min-w-0 flex-1 bg-transparent text-body-l text-neutral-950 outline-none placeholder:text-neutral-400"
               />
@@ -55,8 +71,7 @@ export default function SearchResults({ initialQuery }: { initialQuery: string }
         </div>
       </section>
 
-      {/* Re-keyed per search so filters and pagination start fresh for each query. */}
-      <CourseBrowser key={`${scope}:${query}`} label="Search results" query={query} scope={scope} className="pt-12 pb-16 md:pt-18 md:pb-20" />
+      <CourseBrowser label="Search results" query={query} scope={scope} className="pt-12 pb-16 md:pt-18 md:pb-20" />
     </>
   );
 }

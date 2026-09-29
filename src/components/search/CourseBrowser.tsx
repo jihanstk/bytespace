@@ -106,6 +106,14 @@ export default function CourseBrowser({
   const [showCategories, setShowCategories] = useState(chipsOpen);
   const [page, setPage] = useState(1);
 
+  // A new search starts again from the first page, keeping the chosen filters.
+  const searchKey = `${scope}:${query}`;
+  const [lastSearch, setLastSearch] = useState(searchKey);
+  if (lastSearch !== searchKey) {
+    setLastSearch(searchKey);
+    setPage(1);
+  }
+
   const matches = useMemo(() => filterCatalog(query, scope, creator, filters), [query, scope, creator, filters]);
   const pageSize = paginate ? PAGE_SIZE : matches.length;
   const pageCount = Math.max(1, Math.ceil(matches.length / Math.max(pageSize, 1)));
