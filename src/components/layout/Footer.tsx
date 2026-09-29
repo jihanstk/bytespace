@@ -3,9 +3,9 @@ import Logo from "@/components/layout/Logo";
 import NewsletterForm from "@/components/layout/NewsletterForm";
 import { footerColumns, legalLinks } from "@/lib/content";
 
-export default function Footer() {
+export default function Footer({ bordered = false }: { bordered?: boolean }) {
   return (
-    <footer id="footer" className="bg-white pt-14 pb-10 md:pt-17.5 md:pb-11">
+    <footer id="footer" className={`bg-white pt-14 pb-10 md:pt-17.5 md:pb-11 ${bordered ? "border-t border-neutral-100" : ""}`}>
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[1fr_38.75rem]">
           <div data-reveal>

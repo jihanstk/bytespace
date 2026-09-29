@@ -1,10 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { LevelIcon, StarIcon } from "@/components/ui/icons";
 import { courseMeta, type Course } from "@/lib/content";
 import styles from "./CourseCard.module.css";
 
 type CourseCardProps = {
   course: Pick<Course, "title" | "image">;
+  /** Makes the whole card a link to this URL. */
+  href?: string;
+  level?: string;
+  author?: string;
   /** Hover lift and image zoom; disabled when the card is purely illustrative. */
   interactive?: boolean;
   /** Dark "more learners" badge, used where the card sits on a lime background. */
@@ -15,12 +20,15 @@ type CourseCardProps = {
 
 export default function CourseCard({
   course,
+  href,
+  level = courseMeta.level,
+  author = "purepearl studio",
   interactive = true,
   darkBadge = false,
   sizes = "(min-width: 1280px) 341px, (min-width: 768px) 45vw, 90vw",
   className = "",
 }: CourseCardProps) {
-  const { lessons, duration, comments, rating, author, level, price, learners, learnersMore } = courseMeta;
+  const { lessons, duration, comments, rating, price, learners, learnersMore } = courseMeta;
 
   return (
     <article
@@ -39,7 +47,13 @@ export default function CourseCard({
 
       <div className={styles.heading}>
         <h3 className={styles.title} title={course.title}>
-          {course.title}
+          {href ? (
+            <Link href={href} className={styles.link}>
+              {course.title}
+            </Link>
+          ) : (
+            course.title
+          )}
         </h3>
         <p className={styles.rating} aria-label={`Rated ${rating} out of 5`}>
           {rating}
