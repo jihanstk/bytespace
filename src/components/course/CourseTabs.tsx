@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, useState, type KeyboardEvent } from "react";
+import CourseLessons from "@/components/course/CourseLessons";
 import CourseReviews from "@/components/course/CourseReviews";
 import { CheckCircleIcon } from "@/components/ui/icons";
 import type { CourseDetail } from "@/lib/course-details";
@@ -75,25 +76,7 @@ export default function CourseTabs({ detail }: { detail: CourseDetail }) {
           </>
         )}
 
-        {active === "Lesson" && (
-          <>
-            <h2 className={heading}>
-              {detail.lessonCount} Lessons ({detail.hours} hours)
-            </h2>
-            <ol className="mt-5 divide-y divide-neutral-100 rounded-card border border-neutral-100">
-              {detail.lessons.map((lesson, index) => (
-                <li key={lesson.title} className="flex items-center gap-4 px-5 py-4 text-body-m">
-                  <span className="text-neutral-500">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="flex-1 text-neutral-950">{lesson.title}</span>
-                  <span className="text-primary-800">{lesson.duration}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-4 text-body-s text-neutral-500">
-              {detail.moreVideos} more videos unlock when you enroll.
-            </p>
-          </>
-        )}
+        {active === "Lesson" && <CourseLessons detail={detail} />}
 
         {active === "Reviews" && <CourseReviews courseTitle={detail.heading} />}
       </div>
