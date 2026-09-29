@@ -1,6 +1,6 @@
 # ByteSpace New
 
-Landing, course search, course details, creator profile, 404, sign-in and registration pages for ByteSpace, an online course platform, implemented from the "ByteSpace New" Figma design.
+Landing, course search, course details, creator directory and profiles, 404, sign-in and registration pages for ByteSpace, an online course platform, implemented from the "ByteSpace New" Figma design.
 
 ## Tech Stack
 
@@ -26,7 +26,8 @@ Open [http://localhost:3000](http://localhost:3000). Routes:
 | `/`               | Landing page                            |
 | `/search`         | Course search with filters (`?q=` supported) |
 | `/courses/[slug]` | Course details                          |
-| `/creators/[slug]` | Creator profile (`/creators/purepearl-studio`) |
+| `/creators`       | Creator directory                       |
+| `/creators/[slug]` | Creator profile (e.g. `/creators/purepearl-studio`) |
 | `/login`          | Sign in                                 |
 | `/register`       | Create account                          |
 
@@ -52,7 +53,7 @@ src/
     auth/              shared layout, form and illustration for auth pages
     search/            search page and the shared course filter/grid
     course/            course details sidebar, tabs and share button
-    creator/           creator profile follow controls
+    creator/           creator directory, cards and follow controls
     ui/                buttons, cards, icons, 3D ornaments
     motion/            smooth scrolling and page animation controller
   lib/                 page and course content, GSAP setup
